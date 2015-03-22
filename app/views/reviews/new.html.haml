@@ -1,0 +1,13 @@
+= simple_form_for [@movie, @review ] do |f|
+  =#f.input :rating, collection: 1..5 
+  .field
+    #star-rating
+  = f.input :comment
+  = f.button :submit, "Submit", class: 'btn btn-primary'
+  = link_to "cancel", :back, class: 'btn btn-primary'
+
+:javascript
+  $('#star-rating').raty({
+    path: '/assets/',
+    scoreName: 'review[rating]'
+   })

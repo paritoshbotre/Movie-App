@@ -1,0 +1,10 @@
+= simple_form_for @movie, html: { multipart: true} do |f|
+  = f.input :title, input_html: { class: 'form-control' }
+  = f.input :description, input_html: { class: 'form-control'}
+  = f.input :movie_length, input_html: { class: 'form-control' }
+  = f.input :director, input_html: { class: 'form-control' }
+  = f.input :rating, input_html: { class: 'form-control'}
+  = f.file_field :avatar
+  %br
+  = f.button :submit, class: 'btn btn-primary' 
+  = link_to 'Back', movies_path, class: 'btn btn-primary'

@@ -1,0 +1,11 @@
+- @movies.each do |movie|
+  %tr
+    %td= image_tag movie.image_url(:thumb).to_s if movie.image_url.present?
+    %td= movie.title
+    %td= movie.description
+    %td= movie.movie_length
+    %td= movie.director
+    %td= movie.rating
+    %td= link_to 'show', movie_path(movie), class: 'btn btn-primary'
+    %td= link_to 'edit', edit_movie_path(movie), class: 'btn btn-primary'
+    %td= link_to 'Delete', movie_path(movie), method: :delete, date: {confirm: 'are you sure ???'}, class: 'btn btn-primary'

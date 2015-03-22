@@ -1,0 +1,78 @@
+.panel.panel-default
+  .panel-body
+    .row
+      .col-md-4
+        = image_tag @movie.avatar.url(:medium)
+        .star-rating{ 'data-score' => "#{@avg_review}"}
+        = @reviews.length 
+        reviews
+        %hr
+        .table-responsive
+          %table
+            %tbody
+              %tr
+                %td
+                  %strong Title:
+                %td= @movie.title
+              %br
+              %tr
+                %td
+                  %strong Description:
+                %td= @movie.description
+              %br
+              %tr
+                %td
+                  %strong Director
+                %td= @movie.director
+              %br
+              %tr
+                %td
+                  %strong Movie Length
+                %td= @movie.movie_length
+              %br
+              %tr
+                %td
+                  %strong Rating
+                %td= @movie.rating
+              %br
+          %br
+          = link_to "Write New Reviews", new_movie_review_path(@movie), data: {toggle: 'modal', target: '#mymodal'}, class: 'btn btn-info'
+          #mymodal.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+                    %span{"aria-hidden" => "true"} ×
+                .modal-body
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+      .col-md-7.col-md-offset-1
+        %p= @movie.description
+        - if @reviews.blank?
+          %h4 No Reviews yet, please add new reviews
+          = link_to "Write New Reviews", new_movie_review_path(@movie),data: { toggle: 'modal', target: '#modal1'}, class: 'btn btn-info'
+          #modal1.modal.fade
+            .modal-dialog
+              .modal-content
+                .modal-header
+                  %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type=> "button"}
+                    %span{"aria-hidden" => " true"} x
+                .modal-body
+                .modal-footer
+                  %button.btn.btn-default{"data-dismiss" => 'modal', type: 'button'} Close
+        - else 
+          - @reviews.each do |review|
+            .star-rating{ 'data-score' => "#{review.rating}"}
+            %p= review.comment
+            %hr
+= link_to 'Edit', edit_movie_path(@movie), class: 'btn btn-primary'
+= link_to 'Back', movies_path, class: 'btn btn-primary'
+
+:javascript
+  $('.star-rating').raty({
+    path: '/assets/',
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score')
+    }
+  });
