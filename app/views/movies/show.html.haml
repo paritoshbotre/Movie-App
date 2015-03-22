@@ -14,27 +14,22 @@
                 %td
                   %strong Title:
                 %td= @movie.title
-              %br
               %tr
                 %td
                   %strong Description:
                 %td= @movie.description
-              %br
               %tr
                 %td
                   %strong Director
                 %td= @movie.director
-              %br
               %tr
                 %td
                   %strong Movie Length
                 %td= @movie.movie_length
-              %br
               %tr
                 %td
                   %strong Rating
                 %td= @movie.rating
-              %br
           %br
           = link_to "Write New Reviews", new_movie_review_path(@movie), data: {toggle: 'modal', target: '#mymodal'}, class: 'btn btn-info'
           #mymodal.modal.fade
